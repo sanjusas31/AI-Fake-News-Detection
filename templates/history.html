@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction History</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📊 Prediction History</h1>
+
+        <p class="subtitle">
+            View all previous AI Fake News predictions.
+        </p>
+
+
+        <a href="/" class="back-button">
+            ← Back to Detector
+        </a>
+<form action="/clear-history" method="post">
+
+    <button type="submit" class="clear-button">
+        🗑 Clear History
+    </button>
+
+</form>
+
+        {% if records %}
+
+        <div class="table-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>News</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+
+                        <td>{{ record[0] }}</td>
+
+                        <td>{{ record[1] }}</td>
+
+                        <td>{{ record[2] }}</td>
+
+                        <td>{{ record[3] }}%</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="no-records">
+            No prediction history available.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

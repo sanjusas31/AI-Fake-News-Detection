@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Fake News Detector</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <h1>📰 AI Fake News Detector</h1>
+
+        <p class="subtitle">
+            Enter a news article below and let Artificial Intelligence analyze whether it is Fake or Real.
+        </p>
+
+
+        <form action="/predict" method="post">
+
+            <label for="news">
+                Enter News Article
+            </label>
+
+            <textarea
+                id="news"
+                name="news"
+                placeholder="Paste your news article here..."
+                required>{% if news %}{{ news }}{% endif %}</textarea>
+
+
+            <button type="submit">
+                🔍 Analyze News
+            </button>
+
+        </form>
+        <a href="/history" class="history-button">
+    📊 View Prediction History
+</a>
+        {% if error %}
+
+<div class="error">
+    {{ error }}
+</div>
+
+{% endif %}
+
+        {% if result %}
+
+        <div class="result {{ result_class }}">
+            <h2>{{ result }}</h2>
+
+            <p>
+                Confidence Score:
+                <strong>{{ confidence }}%</strong>
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
