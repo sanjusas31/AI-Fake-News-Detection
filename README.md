@@ -1,4 +1,4 @@
-# AI Fake News Detection System
+# Fake and Real News Classification System
 
 An AI-powered Fake News Detection web application that analyzes news articles and predicts whether the news is Fake or Real.
 
