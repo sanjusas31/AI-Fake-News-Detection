@@ -33,10 +33,14 @@ vectorizer = joblib.load(
     os.path.join(BASE_DIR, "model", "vectorizer.pkl")
 )
 # Create database connection
-conn = sqlite3.connect("news_history.db", check_same_thread=False)
+if os.environ.get("VERCEL"):
+    db_path = "/tmp/news_history.db"
+else:
+    db_path = "news_history.db"
+
+conn = sqlite3.connect(db_path, check_same_thread=False)
 
 cursor = conn.cursor()
-
 # Create prediction history table
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS history (
