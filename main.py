@@ -6,6 +6,7 @@ from pydantic import BaseModel
 
 import joblib
 import sqlite3
+import os
 
 app = FastAPI(
     title="AI Fake News Detection System"
@@ -24,17 +25,12 @@ app.mount(
 templates = Jinja2Templates(
     directory="templates"
 )
-
-
-# Load trained model
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model = joblib.load(
-    "model/fake_news_model.pkl"
+    os.path.join(BASE_DIR, "model", "fake_news_model.pkl")
 )
-
-
-# Load vectorizer
 vectorizer = joblib.load(
-    "model/vectorizer.pkl"
+    os.path.join(BASE_DIR, "model", "vectorizer.pkl")
 )
 # Create database connection
 conn = sqlite3.connect("news_history.db", check_same_thread=False)
